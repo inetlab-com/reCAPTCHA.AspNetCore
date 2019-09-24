@@ -20,4 +20,4 @@
 		document.getElementById('<#= Model.Id #>').form.submit();
 	}
 </script>
-<script src="https://www.google.com/recaptcha/api.js?onload=_<#= Model.Method #>&render=explicit&hl=<#= Model.Language #>" async defer></script>
+<script src="https://<#= RecaptchaService.RecaptchaDomain #>/recaptcha/api.js?onload=_<#= Model.Method #>&render=explicit&hl=<#= Model.Language #>" async defer></script>

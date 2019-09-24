@@ -15,7 +15,7 @@ namespace reCAPTCHA.AspNetCore.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Repository\TimothyMeadows\reCAPTCHA.AspNetCore\reCAPTCHA.AspNetCore\Templates\v3.tt"
+    #line 1 "C:\_INETLAB\PROJECTS\Inetlab.Web.Account\reCAPTCHA\reCAPTCHA.AspNetCore\Templates\v3.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class v3 : v3Base
     {
@@ -26,16 +26,23 @@ namespace reCAPTCHA.AspNetCore.Templates
         public virtual string TransformText()
         {
             this.Write("\r\n<input id=\"g-recaptcha-response\" name=\"g-recaptcha-response\" type=\"hidden\" valu" +
-                    "e=\"\" />\r\n<script src=\"https://www.google.com/recaptcha/api.js?render=");
+                    "e=\"\" />\r\n<script src=\"https://");
             
-            #line 5 "C:\Repository\TimothyMeadows\reCAPTCHA.AspNetCore\reCAPTCHA.AspNetCore\Templates\v3.tt"
+            #line 5 "C:\_INETLAB\PROJECTS\Inetlab.Web.Account\reCAPTCHA\reCAPTCHA.AspNetCore\Templates\v3.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(RecaptchaService.RecaptchaDomain));
+            
+            #line default
+            #line hidden
+            this.Write("/recaptcha/api.js?render=");
+            
+            #line 5 "C:\_INETLAB\PROJECTS\Inetlab.Web.Account\reCAPTCHA\reCAPTCHA.AspNetCore\Templates\v3.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Settings.SiteKey));
             
             #line default
             #line hidden
             this.Write("&hl=");
             
-            #line 5 "C:\Repository\TimothyMeadows\reCAPTCHA.AspNetCore\reCAPTCHA.AspNetCore\Templates\v3.tt"
+            #line 5 "C:\_INETLAB\PROJECTS\Inetlab.Web.Account\reCAPTCHA\reCAPTCHA.AspNetCore\Templates\v3.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Language));
             
             #line default
@@ -43,14 +50,14 @@ namespace reCAPTCHA.AspNetCore.Templates
             this.Write("\"></script>\r\n<script>\r\n\tif (typeof grecaptcha !== \'undefined\') {\r\n\t\tgrecaptcha.re" +
                     "ady(function () {\r\n\t\t\tgrecaptcha.execute(\'");
             
-            #line 9 "C:\Repository\TimothyMeadows\reCAPTCHA.AspNetCore\reCAPTCHA.AspNetCore\Templates\v3.tt"
+            #line 9 "C:\_INETLAB\PROJECTS\Inetlab.Web.Account\reCAPTCHA\reCAPTCHA.AspNetCore\Templates\v3.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Settings.SiteKey));
             
             #line default
             #line hidden
             this.Write("\', { \'action\': \'");
             
-            #line 9 "C:\Repository\TimothyMeadows\reCAPTCHA.AspNetCore\reCAPTCHA.AspNetCore\Templates\v3.tt"
+            #line 9 "C:\_INETLAB\PROJECTS\Inetlab.Web.Account\reCAPTCHA\reCAPTCHA.AspNetCore\Templates\v3.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Action));
             
             #line default

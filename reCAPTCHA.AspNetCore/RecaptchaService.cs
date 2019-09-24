@@ -12,7 +12,14 @@ namespace reCAPTCHA.AspNetCore
 {
     public class RecaptchaService : IRecaptchaService
     {
-        public static bool UseRecaptchaNet { get; set; } = false;
+        public static bool UseRecaptchaNet
+        {
+            get { return RecaptchaDomain == "www.recaptcha.net"; }
+            set { RecaptchaDomain = value ? "www.recaptcha.net" : "www.google.com"; }
+        }
+
+        public static string RecaptchaDomain { get; set; } = "www.google.com";
+
         public static HttpClient Client { get; private set; }
         public readonly RecaptchaSettings RecaptchaSettings;
 
@@ -49,9 +56,9 @@ namespace reCAPTCHA.AspNetCore
             if (!request.Form.ContainsKey("g-recaptcha-response")) // error if no reason to do anything, this is to alert developers they are calling it without reason.
                 throw new ValidationException("Google recaptcha response not found in form. Did you forget to include it?");
 
-            var domain = UseRecaptchaNet ? "www.recaptcha.net" : "www.google.com";
+       
             var response = request.Form["g-recaptcha-response"];
-            var result = await Client.GetStringAsync($"https://{domain}/recaptcha/api/siteverify?secret={RecaptchaSettings.SecretKey}&response={response}");
+            var result = await Client.GetStringAsync($"https://{RecaptchaDomain}/recaptcha/api/siteverify?secret={RecaptchaSettings.SecretKey}&response={response}");
             var captchaResponse = JsonConvert.DeserializeObject<RecaptchaResponse>(result);
 
             if (captchaResponse.success && antiForgery)
@@ -66,8 +73,8 @@ namespace reCAPTCHA.AspNetCore
             if (string.IsNullOrEmpty(responseCode))
                 throw new ValidationException("Google recaptcha response is empty?");
 
-            var domain = UseRecaptchaNet ? "www.recaptcha.net" : "www.google.com";
-            var result = await Client.GetStringAsync($"https://{domain}/recaptcha/api/siteverify?secret={RecaptchaSettings.SecretKey}&response={responseCode}");
+       
+            var result = await Client.GetStringAsync($"https://{RecaptchaDomain}/recaptcha/api/siteverify?secret={RecaptchaSettings.SecretKey}&response={responseCode}");
             var captchaResponse = JsonConvert.DeserializeObject<RecaptchaResponse>(result);
             return captchaResponse;
         }
